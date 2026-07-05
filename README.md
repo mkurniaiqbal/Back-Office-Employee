@@ -11,6 +11,12 @@ Aplikasi Employee Management System yang dibangun menggunakan **Angular 19** ata
 
 ---
 
+## Demo Live Github Pages
+- Jika ingin melihat hasil demo tanpa clone dan instal, klik link dibawah, note(saya menggunakan github page untuk deploy)
+- https://mkurniaiqbal.github.io/Back-Office-Employee/employees
+
+---
+
 ## Teknologi
 
 - **Angular 19** - Framework utama
