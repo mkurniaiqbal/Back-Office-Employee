@@ -1,0 +1,166 @@
+<div class="animate-up">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <button
+      class="btn btn-light rounded-circle border shadow-sm"
+      (click)="kembali()"
+    >
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <div>
+      <h5 class="fw-bold mb-0">Employee Profile</h5>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item" style="font-size: 11px">
+            <a
+              (click)="kembali()"
+              class="text-decoration-none text-muted"
+              style="cursor: pointer"
+            >
+              Employees
+            </a>
+          </li>
+
+          <li
+            class="breadcrumb-item active text-primary"
+            style="font-size: 11px"
+            aria-current="page"
+          >
+            Employees Detail
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- LEFT -->
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100">
+        <div class="mb-3">
+          <img
+            [src]="
+              'https://ui-avatars.com/api/?name=' +
+              employee().firstName +
+              '+' +
+              employee().lastName +
+              '&size=150&background=6366f1&color=fff'
+            "
+            class="rounded-circle"
+            width="120"
+            height="120"
+          />
+        </div>
+
+        <h4 class="fw-bold">
+          {{ employee().firstName }}
+          {{ employee().lastName }}
+        </h4>
+
+        <p class="text-muted">
+          {{ employee().username }}
+        </p>
+
+        <div class="mb-3">
+          <span class="badge bg-info me-2">
+            {{ employee().group }}
+          </span>
+
+          <span
+            class="badge"
+            [class.bg-success]="employee().status === 'Active'"
+            [class.bg-secondary]="employee().status !== 'Active'"
+          >
+            {{ employee().status }}
+          </span>
+        </div>
+        <div class="d-grid gap-2">
+          <a
+            [href]="
+              'https://mail.google.com/mail/?view=cm&fs=1&to=' +
+              employee().email +
+              '&su=Test Masuk Mandiri&body=bismilah...'
+            "
+            target="_blank"
+            class="btn btn-utama-biru rounded-3 text-decoration-none"
+          >
+            <i class="bi bi-envelope me-2"></i> Send Message
+          </a>
+          <button
+            class="btn btn-outline-warning rounded-3"
+            (click)="editEmployee(employee().id)"
+          >
+            <i class="bi bi-pencil me-2"></i> Edit Profile
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Employee Information</h5>
+        </div>
+
+        <div class="card-body">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label class="text-muted small"> Username </label>
+              <div class="fw-semibold">
+                {{ employee().username }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-muted small"> Email </label>
+              <div class="fw-semibold">
+                {{ employee().email }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-muted small"> Birth Date </label>
+              <div class="fw-semibold">
+                {{ employee().birthDate | date: "dd MMMM yyyy" }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-muted small"> Basic Salary </label>
+              <div class="fw-semibold">
+                {{
+                  employee().basicSalary | currency: "Rp" : "symbol" : "1.0-0"
+                }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-muted small"> Status </label>
+              <div class="fw-semibold">
+                {{ employee().status }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="text-muted small"> Group </label>
+              <div class="fw-semibold">
+                {{ employee().group }}
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="text-muted small"> Description </label>
+              <div class="fw-semibold">
+                {{ employee().description | date: "dd MMMM yyyy, HH:mm" }}
+              </div>
+            </div>
+            <button class="btn btn-outline-primary" (click)="kembali()">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

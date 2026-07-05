@@ -1,0 +1,180 @@
+<!-- Filter Atas: Entries & Search Bar -->
+<div class="row g-3 mb-4 align-items-center">
+  <div class="col-12 col-sm-auto d-flex align-items-center gap-2">
+    <label class="text-muted mb-0 flex-shrink-0" style="font-size: 13px"
+      >Show</label
+    >
+    <select
+      class="form-select form-select-sm rounded-3 bg-light border-0"
+      style="width: 75px; height: 38px; font-weight: 500; cursor: pointer"
+      [value]="itemsPerPage()"
+      (change)="onItemsPerPageChange($event)"
+    >
+      <option [value]="5">5</option>
+      <option [value]="10">10</option>
+      <option [value]="25">25</option>
+      <option [value]="50">50</option>
+    </select>
+    <label class="text-muted mb-0 flex-shrink-0" style="font-size: 13px"
+      >entries</label
+    >
+  </div>
+
+  <div class="col-12 col-sm-6 col-md-4 ms-sm-auto">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control border-2"
+        placeholder="Search..."
+        [value]="search()"
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Struktur Render Tabel Utama -->
+<div class="table-responsive">
+  <table class="table table-hover align-middle mb-0">
+    <thead class="bg-light border-bottom">
+      <tr>
+        @for (
+          header of headers();
+          track header;
+          let isFirst = $first;
+          let isLast = $last;
+          let i = $index
+        ) {
+          @let field = searchFields()[i];
+          @let isSortable = field && sortableFields().includes(field);
+
+          <th
+            [class.ps-4]="isFirst"
+            [class.text-center]="isLast"
+            [class.pe-4]="isLast"
+            class="py-3"
+            [style.width]="isLast ? '15%' : 'auto'"
+            [style.cursor]="isSortable ? 'pointer' : 'default'"
+            [class.user-select-none]="isSortable"
+            (click)="isSortable ? onSort(field) : null"
+          >
+            <div
+              class="d-flex align-items-center"
+              [class.justify-content-center]="isLast"
+            >
+              <span
+                class="fw-bold text-secondary"
+                style="font-size: 12px; letter-spacing: 0.5px"
+              >
+                {{ header }}
+              </span>
+
+              @if (isSortable) {
+                <span class="ms-2">
+                  @if (sortKey() === field) {
+                    @if (sortDirection() === "asc") {
+                      <i class="bi bi-arrow-up text-primary fw-bold"></i>
+                    } @else {
+                      <i class="bi bi-arrow-down text-primary fw-bold"></i>
+                    }
+                  } @else {
+                    <i
+                      class="bi bi-arrow-down-up text-muted opacity-50"
+                      style="font-size: 11px"
+                    ></i>
+                  }
+                </span>
+              }
+            </div>
+          </th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of paginatedData(); track item) {
+        <tr>
+          <ng-container
+            *ngTemplateOutlet="
+              rowTemplate() || defaultRow;
+              context: { $implicit: item }
+            "
+          ></ng-container>
+        </tr>
+      } @empty {
+        <tr>
+          <td
+            [attr.colspan]="headers().length"
+            class="text-center py-5 text-muted"
+          >
+            No data found.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Fallback Template -->
+<ng-template #defaultRow let-item>
+  <td [attr.colspan]="headers().length" class="px-4 text-muted">
+    {{ item | json }}
+  </td>
+</ng-template>
+
+<!-- Footer Navigasi Lembar Pagination -->
+@if (filteredData().length > 0) {
+  <div
+    class="d-flex flex-column flex-sm-row justify-content-between align-items-center mt-4 gap-3"
+  >
+    <div class="text-muted" style="font-size: 13px">
+      Showing
+      <strong>{{ (currentPage() - 1) * itemsPerPage() + 1 }}</strong> to
+      <strong>{{
+        Math.min(currentPage() * itemsPerPage(), filteredData().length)
+      }}</strong>
+      of <strong>{{ filteredData().length }}</strong> items
+    </div>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination mb-0 shadow-sm" style="font-size: 13px">
+        <li class="page-item" [class.disabled]="currentPage() === 1">
+          <button
+            class="page-link py-2 px-3 text-dark"
+            (click)="goToPage(currentPage() - 1)"
+          >
+            <span>&laquo;</span>
+          </button>
+        </li>
+
+        @for (page of pageNumbers(); track page) {
+          <li class="page-item" [class.active]="page === currentPage()">
+            <button
+              class="page-link py-2 px-3"
+              [class.bg-primary]="page === currentPage()"
+              [class.text-white]="page === currentPage()"
+              [class.text-dark]="page !== currentPage()"
+              [style.background]="
+                page === currentPage()
+                  ? 'linear-gradient(45deg, #0d6efd, #0dcaf0)'
+                  : ''
+              "
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          </li>
+        }
+
+        <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+          <button
+            class="page-link py-2 px-3 text-dark"
+            (click)="goToPage(currentPage() + 1)"
+          >
+            <span>&raquo;</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+}

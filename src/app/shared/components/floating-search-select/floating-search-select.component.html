@@ -1,0 +1,104 @@
+<div class="dropdown position-relative">
+  <!-- TRIGGER BUTTON: Menggunakan getter showError -->
+  <div
+    class="form-floating form-select d-flex align-items-center position-relative"
+    [class.is-invalid]="showError"
+    [style.height]="'calc(3.5rem + 2px)'"
+    [style.cursor]="disabled ? 'not-allowed' : 'pointer'"
+    [style.background-color]="disabled ? '#e9ecef' : '#fff'"
+    [style.background-image]="'none'"
+    tabindex="0"
+    (click)="toggleDropdown()"
+    (keydown)="onKeyDown($event)"
+    (blur)="onBlur()"
+  >
+    <!-- Konten Teks Terpilih -->
+    <div class="pt-3 w-100 text-start">
+      @if (value) {
+        <span class="text-dark">{{ value }}</span>
+      } @else {
+        <span class="text-muted">Pilih...</span>
+      }
+    </div>
+
+    <!-- Sisi Kanan: Posisi Ikon Tanda Seru Error dan Panah Dropdown -->
+    <div
+      class="d-flex align-items-center pe-2 position-absolute end-0 top-50 translate-middle-y"
+      style="pointer-events: none"
+    >
+      @if (showError) {
+        <i
+          class="bi bi-exclamation-circle text-danger me-2"
+          style="font-size: 1.1rem"
+        ></i>
+      }
+      <i
+        class="bi bi-chevron-down text-secondary"
+        style="font-size: 0.85rem"
+      ></i>
+    </div>
+
+    <!-- Label Floating -->
+    <label
+      [style.transform]="'scale(.85) translateY(-0.5rem) translateX(0.15rem)'"
+      [style.opacity]="'.65'"
+      [style.transition]="'all .1s ease-in-out'"
+      class="position-absolute top-0 start-0 text-muted"
+      style="pointer-events: none; transform-origin: 0 0"
+    >
+      {{ label }}
+    </label>
+  </div>
+
+  <!-- Menu Dropdown Pilihan -->
+  @if (isDropdownOpen) {
+    <div
+      class="dropdown-menu w-100 p-2 shadow-sm"
+      style="max-height: 300px; display: block; z-index: 1050"
+    >
+      <!-- Kolom Input Pencarian -->
+      <div class="mb-2">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [placeholder]="'Cari ' + label + '...'"
+          [value]="searchText"
+          (input)="onSearch($event)"
+          (click)="$event.stopPropagation()"
+          #searchInput
+        />
+      </div>
+
+      <!-- Daftar Item Pilihan -->
+      <ul class="list-unstyled mb-0 overflow-y-auto" style="max-height: 200px">
+        @if (filteredItems.length === 0) {
+          <li class="text-muted text-center small py-2">
+            Data "{{ searchText }}" tidak ditemukan
+          </li>
+        }
+
+        @for (item of filteredItems; track item) {
+          <li>
+            <button
+              type="button"
+              class="dropdown-item rounded py-2"
+              [class.active]="item === value"
+              (click)="selectItem(item); $event.stopPropagation()"
+            >
+              {{ item }}
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>
+
+<!-- Validasi Pesan Error menggunakan ngControl -->
+@if (showError) {
+  <div class="text-danger mt-1">
+    @if (ngControl.errors?.["required"]) {
+      <small>{{ label }} wajib diisi</small>
+    }
+  </div>
+}

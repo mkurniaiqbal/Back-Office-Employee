@@ -1,0 +1,27 @@
+.bg-soft-primary {
+  background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+.card {
+  transition: transform 0.2s;
+}
+
+label {
+  letter-spacing: 0.5px;
+}
+
+/* Animasi saat halaman terbuka */
+.animate-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-light:hover {
+  background-color: #ffffff;
+  border-color: #6366f1;
+  color: #6366f1;
+}

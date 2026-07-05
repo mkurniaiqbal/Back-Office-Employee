@@ -1,0 +1,59 @@
+/* Style Tombol Aksi Bulat Minimalis */
+.btn-action {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* Sudut kotak agak membulat */
+  padding: 0;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background-color: #f8fafc;
+}
+
+.btn-outline-primary { color: #6366f1; }
+.btn-outline-warning { color: #f59e0b; }
+.btn-outline-danger { color: #ef4444; }
+
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.btn-outline-primary:hover { background: #6366f1; color: white; }
+.btn-outline-warning:hover { background: #f59e0b; color: white; }
+.btn-outline-danger:hover { background: #ef4444; color: white; }
+
+.add-employee {
+  background: linear-gradient(45deg, #0dcaf0, #0d6efd ) !important;
+  color: #ffffff !important;
+  display: inline-flex !important; /* Memastikan flexbox berjalan konstan */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  transition: all 0.2s ease-in-out;
+  
+}
+
+/* Efek interaktif saat mouse di atas tombol */
+.add-employee:hover {
+  opacity: 0.93;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+/* Efek saat tombol ditekan */
+.add-employee:active {
+  transform: translateY(1px);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .btn-action {
+    width: 30px;
+    height: 30px;
+  }
+}

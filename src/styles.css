@@ -1,0 +1,53 @@
+/* MAIN CONTENT SCROLL */
+.main-content {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.btn-utama-biru {
+  background: linear-gradient(45deg, #0dcaf0, #0d6efd ) !important;
+  color: #ffffff !important;
+  display: inline-flex !important; /* Memastikan flexbox berjalan konstan */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  transition: all 0.2s ease-in-out;
+  
+}
+
+/* Efek interaktif saat mouse di atas tombol */
+.btn-utama-biru:hover {
+  opacity: 0.93;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+/* Efek saat tombol ditekan */
+.btn-utama-biru:active {
+  transform: translateY(1px);
+}
+
+/* Tombol Danger Gradien (Merah/Oranye) */
+.btn-danger-gradien {
+  background: linear-gradient(45deg, #ffc107, #dc3545) !important; /* Gradasi dari oranye/kuning hangat ke merah khas danger */
+  color: #ffffff !important;
+  display: inline-flex !important; /* Memastikan flexbox berjalan konstan */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.35); /* Shadow halus berwarna merah */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efek interaktif saat mouse di atas tombol danger */
+.btn-danger-gradien:hover {
+  opacity: 0.93;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.45); /* Shadow lebih tegas saat di-hover */
+}
+
+/* Efek saat tombol danger ditekan */
+.btn-danger-gradien:active {
+  transform: translateY(1px);
+}

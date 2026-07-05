@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.sidebar-wrapper {
+  background-color: #0f172a; /* Slate 900 */
+}
+
+/* Brand & Logo */
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+.brand-text {
+  letter-spacing: -1px;
+}
+
+.text-primary-light {
+  color: #818cf8;
+}
+
+.sidebar-divider {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Navigation Links */
+.sidebar-nav {
+  padding: 10px;
+}
+
+.custom-nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.custom-nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.active-link {
+  background: linear-gradient(45deg, #0d6efd, #0dcaf0) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.icon-wrapper {
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+}
+
+/* User Profile */
+.user-profile-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.text-muted-sidebar {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border: 2px solid #0f172a;
+  border-radius: 50%;
+}

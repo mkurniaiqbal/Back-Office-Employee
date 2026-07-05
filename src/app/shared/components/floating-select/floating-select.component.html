@@ -1,0 +1,29 @@
+<div class="form-floating">
+  <select
+    class="form-select"
+    [id]="id"
+    [value]="value"
+    [disabled]="disabled"
+    (change)="change($event)"
+    (blur)="blur()"
+    [class.is-invalid]="showError"
+  >
+    <option value="" disabled>Pilih...</option>
+
+    @for (item of items; track item) {
+      <option [value]="item">
+        {{ item }}
+      </option>
+    }
+  </select>
+
+  <label [for]="id">{{ label }}</label>
+</div>
+
+@if (showError) {
+  <div class="text-danger mt-1">
+    @if (ngControl.errors?.["required"]) {
+      <small>{{ label }} wajib diisi</small>
+    }
+  </div>
+}

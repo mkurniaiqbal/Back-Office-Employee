@@ -1,0 +1,60 @@
+<div class="container-fluid p-0 overflow-hidden">
+  <div class="row g-0 min-vh-100">
+    <aside
+      class="col-lg-2 d-none d-lg-flex flex-column border-end shadow-sm main-sidebar"
+    >
+      <app-sidebar></app-sidebar>
+    </aside>
+
+    <div
+      class="offcanvas offcanvas-start border-0 shadow-lg mobile-sidebar"
+      tabindex="-1"
+      id="mobileSidebar"
+    >
+      <div class="offcanvas-body p-0 h-100">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+
+    <main
+      class="col-12 col-lg-10 d-flex flex-column bg-soft-light main-content"
+    >
+      <header
+        class="navbar sticky-top bg-white border-bottom px-4 py-0 shadow-sm custom-header"
+      >
+        <div class="d-flex align-items-center gap-3 w-100">
+          <button
+            class="btn btn-icon d-lg-none"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar"
+          >
+            <i class="bi bi-list fs-3"></i>
+          </button>
+          <h5 class="mb-0 fw-bold text-slate-800">{{ title }}</h5>
+          <div class="ms-auto d-flex align-items-center gap-2">
+            <button
+              class="btn btn-icon position-relative"
+              (click)="showUnderDevelopmentAlert()"
+            >
+              <i class="bi bi-bell text-muted"></i>
+              <span class="notification-badge"></span>
+            </button>
+            <button
+              class="btn btn-light rounded-pill d-none d-md-flex align-items-center gap-2 px-3 border shadow-sm"
+              (click)="logout()"
+            >
+              <small class="fw-medium text-dark">Sign Out</small>
+              <i class="bi bi-box-arrow-right text-danger"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="p-4 flex-grow-1 overflow-auto bg-main-canvas">
+        <div class="content-wrapper animate-up">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

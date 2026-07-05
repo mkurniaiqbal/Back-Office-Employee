@@ -1,0 +1,7 @@
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-control {
+  transition: all 0.2s ease;
+}

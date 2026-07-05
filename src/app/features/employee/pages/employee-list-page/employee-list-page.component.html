@@ -1,0 +1,130 @@
+<div
+  class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3"
+>
+  <div>
+    <h5 class="fw-bold mb-1 text-dark">Employee List</h5>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item" style="font-size: 11px">Employees</li>
+        <li
+          class="breadcrumb-item active text-primary"
+          aria-current="page"
+          style="font-size: 11px"
+        >
+          Employees List
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <button
+    class="btn add-employee rounded-3 px-4 d-flex align-items-center gap-2 text-white border-0"
+    (click)="addEmployee()"
+  >
+    <i class="bi bi-plus-circle"></i>
+    <span>Add Employee</span>
+  </button>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
+  <div class="card-body">
+    <!-- PEMANGGILAN SMART TABLE DENGAN INPUT STATE & OUTPUT EVENT -->
+    <app-smart-table
+      [data]="employeeService.employees()"
+      [headers]="[
+        'NAME',
+        'USERNAME',
+        'EMAIL',
+        'GROUP',
+        'SALARY',
+        'STATUS',
+        'ACTIONS',
+      ]"
+      [searchFields]="[
+        'firstName',
+        'username',
+        'email',
+        'group',
+        'basicSalary',
+        'status',
+      ]"
+      [sortableFields]="[
+        'firstName',
+        'username',
+        'email',
+        'group',
+        'basicSalary',
+        'status',
+      ]"
+      [rowTemplate]="employeeRow"
+      [initSearch]="searchParam()"
+      [initPage]="pageParam()"
+      [initSize]="sizeParam()"
+      [initSort]="sortParam()"
+      [initDirection]="directionParam()"
+      (stateChange)="updateQueryParams($event)"
+    >
+    </app-smart-table>
+
+    <!-- TEMPLATE BARIS KARYAWAN -->
+    <ng-template #employeeRow let-e>
+      <td class="ps-4 py-3">
+        <div class="d-flex align-items-center">
+          <img
+            [src]="
+              'https://ui-avatars.com/api/?name=' +
+              e.firstName +
+              '+' +
+              e.lastName +
+              '&background=E0E7FF&color=4338CA'
+            "
+            class="rounded-circle me-3"
+            width="35"
+          />
+          <span class="fw-semibold">{{ e.firstName }} {{ e.lastName }}</span>
+        </div>
+      </td>
+
+      <td class="py-3">{{ e.username }}</td>
+      <td class="py-3">{{ e.email }}</td>
+      <td class="py-3">
+        <span class="badge bg-info-subtle text-info">{{ e.group }}</span>
+      </td>
+      <td class="py-3">
+        {{ e.basicSalary | currency: "Rp" : "symbol" : "1.0-0" }}
+      </td>
+      <td class="py-3">
+        <span
+          class="badge"
+          [class.bg-success]="e.status === 'Active'"
+          [class.bg-secondary]="e.status !== 'Active'"
+        >
+          {{ e.status }}
+        </span>
+      </td>
+
+      <td class="text-center pe-4 py-3">
+        <div class="d-flex justify-content-center gap-2">
+          <button
+            class="btn btn-action btn-outline-primary"
+            (click)="previewData(e.id)"
+          >
+            <i class="bi bi-eye"></i>
+          </button>
+          <button
+            class="btn btn-action btn-outline-warning"
+            (click)="editEmployee(e.id)"
+          >
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button
+            class="btn btn-action btn-outline-danger"
+            (click)="deleteRow(e.id)"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </td>
+    </ng-template>
+  </div>
+</div>

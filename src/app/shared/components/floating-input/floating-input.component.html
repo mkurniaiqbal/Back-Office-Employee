@@ -1,0 +1,35 @@
+<div class="form-floating">
+  <input
+    class="form-control"
+    [id]="id"
+    [type]="inputType"
+    [placeholder]="placeholder || label"
+    [readonly]="readonly"
+    [disabled]="disabled"
+    [class.is-invalid]="showError"
+    [max]="max"
+    [value]="displayValue"
+    (input)="input($event)"
+    (focus)="focus()"
+    (blur)="blur()"
+  />
+
+  <label [for]="id">
+    {{ label }}
+  </label>
+</div>
+
+<!-- Menggunakan ngControl bawaan Angular -->
+@if (showError && type != "currency") {
+  <div class="text-danger mt-1">
+    @if (ngControl.errors?.["required"]) {
+      <small>{{ label }} wajib diisi</small>
+    } @else if (ngControl.errors?.["email"]) {
+      <small>Email tidak valid</small>
+    } @else if (ngControl.errors?.["pattern"]) {
+      <small>{{ label }} tidak boleh mengandung spasi</small>
+    } @else if (ngControl.errors?.["maxDate"]) {
+      <small>{{ label }} tidak boleh lebih dari hari ini</small>
+    }
+  </div>
+}
